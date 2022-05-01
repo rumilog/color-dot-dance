@@ -16,13 +16,13 @@ function setup() {
 function draw() {
   background(0);
   stroke(255)
+  strokeWeight(3)
   noFill()
-
   translate(width/2, height/2);
 
   fft.analyze()
   amp = fft.getEnergy(1,255)
-  ampt= fft.getEnergy(9000,10000)
+  ampt= fft.getEnergy(17100)
 
   var wave = fft.waveform();
   console.log(amp);
@@ -39,10 +39,15 @@ function draw() {
     }
     endShape()
   }
+  if(ampt>0){
+    drawingContext.filter = 'blur(20px)';
+    fill(random(0,204), random(25,229), 255);
+    strokeWeight(5)
+    img = circle(0,0,ampt*5)
+    drawingContext.filter = 'none';
+  }
   
-  fill(random(0,204), random(25,229), 255);
-  noStroke();
-  img = circle(0,0,ampt)
+
   var p = new Particle();
   particles.push(p)
   
@@ -100,6 +105,7 @@ class Particle{
       this.pos.add(this.vel)
       this.pos.add(this.vel)
       this.pos.add(this.vel)
+
     }
   }
 
@@ -117,6 +123,5 @@ class Particle{
     noStroke()
     fill(this.color)
     ellipse(this.pos.x, this.pos.y, this.w);
-
   }
 }
