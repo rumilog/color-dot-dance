@@ -17,6 +17,10 @@ function setup() {
   slider.position(20, height - 50);
   slider.style("width", "300px");
   slider.input(scrubSong); // Call function when slider is moved
+
+  //scrolling disable
+  document.body.style.overflow = "hidden";
+
 }
 
 function draw() {
